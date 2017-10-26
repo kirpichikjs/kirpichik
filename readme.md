@@ -15,7 +15,7 @@ npm i -g kirpichik
 ## Usage
 
 ```bash
-kirpichik -t vue -k true Component OtherComponent
+kirpichik -t vue -k Component OtherComponent
 ```
 
 ## Options
@@ -23,7 +23,11 @@ kirpichik -t vue -k true Component OtherComponent
 |                   |                                                            |
 |-------------------|------------------------------------------------------------|
 |`-t`, `--template` | Component template                                         |
-|`-k`, `--kebab`    | Transform component classes to kebab-case (useful for vue) |
 
 ## Component creation
 
+Soon!
+
+## Components list
+
+Soon!
