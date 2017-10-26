@@ -7,7 +7,7 @@ import getRootModulesPath from './getRootModulesPath'
  */
 async function getAllowedTemplatesList (): Promise<Array<string>> {
   const rootPath = await getRootModulesPath()
-  const rootModulesList = fs.readdirSync('/usr/lib/node_modules')
+  const rootModulesList = fs.readdirSync(rootPath)
 
   return rootModulesList.filter((module) => /^kirpichik-\S+$/.test(module))
 }
