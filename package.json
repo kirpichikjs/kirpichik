@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/typescript/bin/tsc",
-    "dev": "./node_modules/typescript/bin/tsc -w",
-    "test": "./node_modules/jest-cli/bin/jest",
-    "lint": "./node_modules/tslint/bin/tslint ./src/**/*.ts",
+    "build": "node_modules/typescript/bin/tsc",
+    "dev": "node_modules/typescript/bin/tsc -w",
+    "test": "node_modules/jest-cli/bin/jest.js",
+    "lint": "node_modules/tslint/bin/tslint src/**/*.ts",
     "postinstall": "npm run build"
   },
   "bin": {
-    "kirpichik": "./bin/kirpichik.js"
+    "kirpichik": "bin/kirpichik.js"
   },
   "repository": {
     "type": "git",
