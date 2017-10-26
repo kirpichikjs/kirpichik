@@ -1,6 +1,6 @@
 # Kirpichik
 
-[![Build Status](https://travis-ci.org/lamartire/kirpichik.svg?branch=master)](https://travis-ci.org/lamartire/kirpichik)
+[![Build Status](https://travis-ci.org/kirpichikjs/kirpichik.svg?branch=master)](https://travis-ci.org/kirpichikjs/kirpichik)
 
 > Minimalistic and flexible scaffold tool for components creation :building_construction:
 
