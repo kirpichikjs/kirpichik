@@ -64,6 +64,8 @@ structure:
 
 `helpers` - path to component helpers. Default `src/helpers`
 
+You can also check example of [vue-component template](https://github.com/kirpichikjs/kirpichik-vue).
+
 ### Templates reference
 
 `kirpichik` templates uses `handlebars`-like syntax.
