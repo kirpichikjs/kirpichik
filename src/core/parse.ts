@@ -1,5 +1,5 @@
-import * as ejs from 'ejs'
 import * as argv from 'minimist'
+import parser from './../lib/parser'
 import messenger from '../lib/messenger'
 import ITemplate from '../types/ITemplate'
 import search from './search'
@@ -35,9 +35,13 @@ async function parse (): Promise<Array<ITemplate>> {
   return flat(components.map((component) => templateData.map((template) => ({
     name: component,
     ext: template.ext,
-    parsed: ejs.render(template.source, {
-      '__NAME__': component
-    })
+    parsed: parser(
+      template.source,
+      {
+        '__NAME__': component
+      },
+      template.helpers
+    )
   }))))
 }
 

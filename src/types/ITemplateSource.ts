@@ -1,4 +1,5 @@
 export default interface ITemplateSource {
   ext: string,
-  source: string
+  source: string,
+  helpers: any
 }

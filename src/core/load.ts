@@ -19,9 +19,23 @@ async function load (templateName: string): Promise<Array<ITemplateSource>> {
     throw new Error('kirpichikrc.json is not exist!')
   }
 
-  const { template } = JSON.parse(templateConfiguration)
-  const templatesFilesPath = path.join(templatePath, template)
+  const {
+    templates = 'src/templates',
+    helpers = 'src/helpers'
+  } = JSON.parse(templateConfiguration)
+  const templatesFilesPath = path.join(templatePath, templates)
+  const templatesHelpersPath = path.join(templatePath, helpers)
   const templateFiles = fs.readdirSync(templatesFilesPath)
+  const helpersFiles = fs.readdirSync(templatesHelpersPath)
+  let helpersFunctions: any = {}
+
+  if (helpersFiles.length > 0) {
+    helpersFiles.map((helper) => {
+      const helperName = helper.match(/^[a-zA-Z0-9_]+/)[0]
+
+      helpersFunctions[helperName] = require(path.resolve(templatesHelpersPath, helper))
+    })
+  }
 
   return templateFiles.map((templateFile) => {
     return {
@@ -29,7 +43,8 @@ async function load (templateName: string): Promise<Array<ITemplateSource>> {
       source: fs.readFileSync(
         path.join(templatesFilesPath, templateFile),
         'utf-8'
-      )
+      ),
+      helpers: helpersFunctions
     }
   })
 }
