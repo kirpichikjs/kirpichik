@@ -2,6 +2,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import ITemplateSource from '../types/ITemplateSource'
 import getRootModulesPath from '../lib/getRootModulesPath'
+import messenger from '../lib/messenger'
 
 /**
  *
@@ -26,15 +27,20 @@ async function load (templateName: string): Promise<Array<ITemplateSource>> {
   const templatesFilesPath = path.join(templatePath, templates)
   const templatesHelpersPath = path.join(templatePath, helpers)
   const templateFiles = fs.readdirSync(templatesFilesPath)
-  const helpersFiles = fs.readdirSync(templatesHelpersPath)
   let helpersFunctions: any = {}
 
-  if (helpersFiles.length > 0) {
-    helpersFiles.map((helper) => {
-      const helperName = helper.match(/^[a-zA-Z0-9_]+/)[0]
+  try {
+    const helpersFiles = fs.readdirSync(templatesHelpersPath)
 
-      helpersFunctions[helperName] = require(path.resolve(templatesHelpersPath, helper))
-    })
+    if (helpersFiles.length > 0) {
+      helpersFiles.map((helper) => {
+        const helperName = helper.match(/^[a-zA-Z0-9_]+/)[0]
+
+        helpersFunctions[helperName] = require(path.resolve(templatesHelpersPath, helper))
+      })
+    }
+  } catch (err) {
+    helpersFunctions = {}
   }
 
   return templateFiles.map((templateFile) => {

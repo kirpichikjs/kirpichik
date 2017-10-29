@@ -3,7 +3,8 @@ import chalk from 'chalk'
 interface IColors {
   info: string,
   error: string,
-  message: string
+  message: string,
+  warning: string
 }
 
 /**
@@ -15,10 +16,14 @@ function messenger (message: string, type: string = 'info') {
   const colors: IColors = {
     info: 'green',
     error: 'red',
-    message: 'blue'
+    message: 'blue',
+    warning: 'yellow'
   }
 
   switch (type) {
+    case 'warning':
+      console.warn(chalk.yellow(message))
+      break
     case 'error':
       console.error(chalk.red(message))
       break
