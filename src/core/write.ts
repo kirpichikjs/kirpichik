@@ -12,7 +12,7 @@ function write (parsedTemplates: Array<ITemplate>) {
   const targetDir = process.cwd()
 
   parsedTemplates.map((template) => {
-    const { name, ext, parsed } = template
+    const { name, ext, compiled } = template
     const componentPath = path.join(targetDir, name)
     const componentFileName = `${name}.${ext}`
     const componentFullPath = path.join(componentPath, componentFileName)
@@ -25,7 +25,7 @@ function write (parsedTemplates: Array<ITemplate>) {
       }
     }
 
-    fs.writeFileSync(componentFullPath, parsed)
+    fs.writeFileSync(componentFullPath, compiled)
 
     messenger(`${chalk.bold('Component created')}: ${componentFullPath}`)
   })

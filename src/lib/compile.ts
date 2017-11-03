@@ -5,8 +5,8 @@ import IHelpers from '../types/IHelpers'
 
 /**
  * Parse template data, replace constants, apply helpers
- * @param template
- * @param options
+ * @param template - Loaded template content
+ * @param options - Template options
  */
 function compile (template: string, options: any, helpers?: IHelpers): string {
   initCompiler()
