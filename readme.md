@@ -1,6 +1,10 @@
-# Kirpichik
+<p align="center">
+  <a href="https://github.com/kirpichikjs/kirpichik" target="_blank">
+    <img width="150"src="https://raw.githubusercontent.com/kirpichikjs/kirpichik/logo.png" />
+  </a>
+</p>
 
-[![Build Status](https://travis-ci.org/kirpichikjs/kirpichik.svg?branch=master)](https://travis-ci.org/kirpichikjs/kirpichik)
+# Kirpichik [![Build Status](https://travis-ci.org/kirpichikjs/kirpichik.svg?branch=master)](https://travis-ci.org/kirpichikjs/kirpichik)
 
 > Minimalistic and flexible scaffold tool for components creation :building_construction:
 
