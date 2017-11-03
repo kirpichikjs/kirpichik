@@ -1,5 +1,6 @@
 import * as argv from 'minimist'
-import parser from './../lib/parser'
+import initCompiler from './../lib/initCompiler'
+import compile from './../lib/compile'
 import messenger from '../lib/messenger'
 import ITemplate from '../types/ITemplate'
 import search from './search'
@@ -35,7 +36,7 @@ async function parse (): Promise<Array<ITemplate>> {
   return flat(components.map((component) => templateData.map((template) => ({
     name: component,
     ext: template.ext,
-    parsed: parser(
+    compiled: compile(
       template.source,
       {
         '__NAME__': component

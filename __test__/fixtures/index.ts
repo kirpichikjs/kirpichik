@@ -2,13 +2,10 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 interface Ifixtures {
-  plain: Ifixture,
-  kebab: Ifixture,
-  customHelper: Ifixture
+  [x: string]: Ifixture
 }
 interface Ifixture {
-  source: string,
-  parsed: string
+  [x: string]: string
 }
 
 const fixtures: Ifixtures = {
@@ -23,6 +20,10 @@ const fixtures: Ifixtures = {
   customHelper: {
     source: fs.readFileSync(path.join(__dirname, './source/customHelper.html'), 'utf-8'),
     parsed: fs.readFileSync(path.join(__dirname, './parsed/customHelper.html'), 'utf-8')
+  },
+  registerHelpers: {
+    source: fs.readFileSync(path.join(__dirname, './source/registerHelpers.html'), 'utf-8'),
+    parsed: fs.readFileSync(path.join(__dirname, './parsed/registerHelpers.html'), 'utf-8')
   }
 }
 

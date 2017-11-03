@@ -68,10 +68,10 @@ You can also check example of [vue-component template](https://github.com/kirpic
 
 ### Templates reference
 
-`kirpichik` templates uses `handlebars`-like syntax.
+`kirpichik` templates uses `handlebars` as template engine.
 
 ```html
-<div class="{{ __NAME__ }}"></div>
+<div class="{{__NAME__}}"></div>
 ```
 
 All logical constructions must be wrapped into double handlebars. In the
@@ -81,7 +81,7 @@ always replacing by component name.
 You can also use helpers functions:
 
 ```html
-<div class="{{ __NAME__ | kebab }}"></div>
+<div class="{{kebab __NAME__}}"></div>
 ```
 
 Component `HelloWorld` compiles to:
@@ -98,15 +98,13 @@ file in `helpers` directory of your template.
 For example:
 
 ```html
-<div class="{{ __NAME__ | reverse }}"></div>
+<div class="{{reverse __NAME__}}"></div>
 ```
 
 `helpers/reverse.js`:
 
 ```js
-function reverse (input) {
-  return input.split('').reverse().join('')
-}
+const reverse = (input) => input.split('').reverse().join('')
 
 module.exports = reverse // Must be common-js module!
 ```

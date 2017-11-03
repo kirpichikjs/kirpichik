@@ -1,5 +1,3 @@
 export default interface ITemplate {
-  name: string,
-  ext: string,
-  parsed: string
+  [x: string]: string
 }
