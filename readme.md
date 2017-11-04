@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/kirpichikjs/kirpichik" target="_blank">
-    <img width="150"src="https://raw.githubusercontent.com/kirpichikjs/kirpichik/logo.png" />
+    <img width="150"src="https://github.com/kirpichikjs/kirpichik/blob/master/logo.png?raw=true" />
   </a>
 </p>
 
