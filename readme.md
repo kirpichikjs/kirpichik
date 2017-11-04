@@ -10,12 +10,12 @@
 
 ## Table of content
 
-1. [Installation]()
-2. [Usage]()
-3. [Options]()
-4. [Component creation]()
-5. [Templates reference]()
-6. [Helper reference]()
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Options](#options)
+4. [Component creation](#component-creation)
+5. [Templates reference](#templates-reference)
+6. [Helper reference](#helper-reference)
 
 ## Installation
 
