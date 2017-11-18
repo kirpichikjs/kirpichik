@@ -1,31 +1,42 @@
 import * as path from 'path'
 import * as fs from 'fs'
+import chalk from 'chalk'
 import ITemplateSource from '../types/ITemplateSource'
+import IConfig from '../types/IConfig'
 import getRootModulesPath from '../lib/getRootModulesPath'
 import messenger from '../lib/messenger'
 
 /**
- *
+ * Loads template data
  * @param templateName
  */
-async function load (templateName: string): Promise<Array<ITemplateSource>> {
+async function load (
+  templateName: string,
+  config: IConfig,
+  branch?: string
+): Promise<Array<ITemplateSource>> {
   const rootPath = await getRootModulesPath()
   const templatePath = path.join(rootPath, templateName)
-  const templateConfiguration = fs.readFileSync(
-    path.join(templatePath, 'kirpichikrc.json'),
-    'utf-8'
-  )
+  const { helpers, options, branches } = config
+  let templatesFilesPath = path.join(templatePath, 'src/templates')
 
-  if (!templateConfiguration) {
-    throw new Error('kirpichikrc.json is not exist!')
+  if (branch && !branches) {
+    messenger(
+      `${chalk.bold(templateName)} has not branches!`,
+      'error'
+    )
+    process.exit(1)
+  } else if (branch && !branches[branch]) {
+    messenger(
+      `${chalk.bold(templateName)} has not branch ${chalk.bold(branch)}!`,
+      'error'
+    )
+    process.exit(1)
+  } else if (branch) {
+    templatesFilesPath = path.join(templatesFilesPath, branch)
   }
 
-  const {
-    templates = 'src/templates',
-    helpers = 'src/helpers'
-  } = JSON.parse(templateConfiguration)
-  const templatesFilesPath = path.join(templatePath, templates)
-  const templatesHelpersPath = path.join(templatePath, helpers)
+  const templatesHelpersPath = path.join(templatePath, 'src/helpers')
   const templateFiles = fs.readdirSync(templatesFilesPath)
   let helpersFunctions: any = {}
 
@@ -46,6 +57,7 @@ async function load (templateName: string): Promise<Array<ITemplateSource>> {
   return templateFiles.map((templateFile) => {
     return {
       ext: templateFile.split('.').pop(),
+      originName: templateFile.split('.').shift(),
       source: fs.readFileSync(
         path.join(templatesFilesPath, templateFile),
         'utf-8'

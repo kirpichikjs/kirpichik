@@ -1,8 +1,11 @@
 import messenger from '../lib/messenger'
-import search from '../core/search'
-import load from '../core/load'
-import prepare from '../core/prepare'
-import write from '../core/write'
+import search from './search'
+import loadConfig from './loadConfig'
+import load from './load'
+import prepare from './prepare'
+import write from './write'
+import info from './info'
+import help from './help'
 
 /**
  * Generate components by options
@@ -10,13 +13,22 @@ import write from '../core/write'
  */
 async function core (args: any) {
   const templateName = args.t || args.template
+  const helpRequesting = args.h || args.help
+  const infoRequesting = args.i || args.info
+  const branch = args.b || args.branch
+  const options = args.o || args.options
   const components = args._
+
+  if (helpRequesting) {
+    help()
+    process.exit()
+  }
 
   const targetTemplateName: string = templateName.indexOf('kirpichik-') === -1
     ? `kirpichik-${templateName}`
     : templateName
 
-  if (!components || components.length === 0) {
+  if ((!components || components.length === 0) && !infoRequesting) {
     messenger('No components to generate!', 'error')
     process.exit(1)
   }
@@ -31,10 +43,19 @@ async function core (args: any) {
     process.exit(1)
   }
 
-  const targetTemplateSource = await load(targetTemplateName)
-  const compiledTemplates = await prepare(targetTemplateSource, components)
+  if (infoRequesting) {
+    await info(targetTemplateName)
+  } else {
+    const targetTemplateConfig = await loadConfig(targetTemplateName)
+    const targetTemplateSource = await load(targetTemplateName, targetTemplateConfig, branch)
+    const compiledTemplates = await prepare(
+      targetTemplateSource,
+      components,
+      options
+    )
 
-  await write(compiledTemplates)
+    await write(targetTemplateConfig, compiledTemplates)
+  }
 }
 
 export default core
