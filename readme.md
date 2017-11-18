@@ -13,9 +13,10 @@
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [Options](#options)
-4. [Component creation](#component-creation)
-5. [Templates reference](#templates-reference)
-6. [Helper reference](#helper-reference)
+5. [Component creation](#component-creation)
+6. [Templates reference](#templates-reference)
+7. [Helper reference](#helper-reference)
+8. [Roadmap](#roadmap)
 
 ## Installation
 
@@ -37,14 +38,20 @@ Ans use it! It doesn't need any configuration. Call it directly in directory,
 where you want generate components:
 
 ```bash
-kirpichik -t vue -k Component OtherComponent
+kirpichik -t vue Component OtherComponent
 ```
 
 ## Options
 
-|                   |                                                            |
+| Command           | Command description                                        |
 |-------------------|------------------------------------------------------------|
 |`-t`, `--template` | Component template                                         |
+|`-h`, `--help`     | Help calling                                               |
+|`-i`, `--info`     | Info about choosen template. Must be used with `-t`        |
+|`-b`, `--branch`   | Using choosen template branch                              |
+|`-o`, `--options`  | Pass options to template for "slim configuration"          |
+
+You can also call `--help` and see all options with examples.
 
 ## Component creation
 
@@ -64,9 +71,11 @@ structure:
 
 `description` - component description
 
-`template` - path to component templates. Default `src/template`.
+`saveOriginNames` - save original template files name. Directory always takes component name!
 
-`helpers` - path to component helpers. Default `src/helpers`
+`branches` - description and definition of all template branches
+
+`options` - description and definition of all template options
 
 You can also check example of [vue-component template](https://github.com/kirpichikjs/kirpichik-vue).
 
@@ -113,8 +122,16 @@ const reverse = (input) => input.split('').reverse().join('')
 module.exports = reverse // Must be common-js module!
 ```
 
-Compilation result with `HelloWorld` name :tada::
+Compilation result with `HelloWorld` name:
 
 ```html
 <div class="dlroWolleH"></div>
 ```
+
+:tada: that it!
+
+## Roadmap
+
+- [ ] - allow to save origin name of specifiy files
+- [ ] - extract application core to isolated package
+- [ ] - write documentation
