@@ -11,12 +11,15 @@ import IConfig from '../types/IConfig'
  */
 function write (config: IConfig, parsedTemplates: Array<ITemplate>) {
   const targetDir = process.cwd()
-  const { saveOriginNames } = config
+  const { saveOriginNames = [] } = config
 
   parsedTemplates.map((template) => {
     const { name, ext, compiled, originName } = template
     const componentPath = path.join(targetDir, name)
-    const componentFileName = `${saveOriginNames ? originName : name}.${ext}`
+    const componentName = saveOriginNames.indexOf(originName) !== -1
+      ? originName
+      : name
+    const componentFileName = `${componentName}.${ext}`
     const componentFullPath = path.join(componentPath, componentFileName)
 
     try {
