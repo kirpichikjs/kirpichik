@@ -5,7 +5,7 @@ import getRootModulesPath from './getRootModulesPath'
 /**
  * Returns all allowed kirpichik templates
  */
-async function getAllowedTemplatesList (): Promise<Array<string>> {
+async function getAllowedTemplatesList (): Promise<string[]> {
   const rootPath = await getRootModulesPath()
   const rootModulesList = fs.readdirSync(rootPath)
 

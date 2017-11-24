@@ -14,7 +14,7 @@ async function load (
   templateName: string,
   config: IConfig,
   branch?: string
-): Promise<Array<ITemplateSource>> {
+): Promise<ITemplateSource[]> {
   const rootPath = await getRootModulesPath()
   const templatePath = path.join(rootPath, templateName)
   const { helpers, options, branches } = config

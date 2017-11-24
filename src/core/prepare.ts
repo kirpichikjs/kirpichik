@@ -16,10 +16,10 @@ import ITemplateSource from '../types/ITemplateSource'
  * @param optionsString
  */
 async function prepare (
-  templateSource: Array<ITemplateSource>,
-  components: Array<string>,
+  templateSource: ITemplateSource[],
+  components: [string],
   optionsString?: string
-): Promise<Array<ITemplate>> {
+): Promise<ITemplate[]> {
   const options = optionsString && createOptions(optionsString) || {}
 
   return flat(components.map((component) => templateSource.map((template) => ({

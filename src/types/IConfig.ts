@@ -1,7 +1,7 @@
 export default interface IConfig {
   name: string,
   description: string,
-  saveOriginNames?: Array<string>,
+  namesIngorePatterns?: string[],
   helpers?: {
     [x: string]: Function
   },

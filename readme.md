@@ -71,7 +71,7 @@ structure:
 
 `description` - component description
 
-`saveOriginNames` - save original template files name. Directory always takes component name!
+`namesIngorePatterns` - save original template files name. Directory always takes component name!
 
 `branches` - description and definition of all template branches
 

@@ -33,7 +33,7 @@ async function core (args: any) {
     process.exit(1)
   }
 
-  const allowedTemplates: Array<string> = await search(templateName)
+  const allowedTemplates: string[] = await search(templateName)
 
   if (allowedTemplates.indexOf(targetTemplateName) === -1) {
     messenger([
