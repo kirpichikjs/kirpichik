@@ -7,7 +7,7 @@ import load from './load'
  * Search expected templated
  * @param template
  */
-async function search (template: string): Promise<string[]> {
+async function search(template: string): Promise<string[]> {
   const rootPath = await getRootModulesPath()
   const allowedTemplates = await getAllowedTemplatesList()
 

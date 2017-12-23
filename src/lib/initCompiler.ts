@@ -1,12 +1,16 @@
 import registerHelpers from './registerHelpers'
 import kebab from './helpers/kebab'
+import concat from './helpers/concat'
+import couple from './helpers/couple'
 
 /**
  *
  */
-function initCompiler () {
+function initCompiler() {
   registerHelpers({
-    kebab: kebab
+    kebab: kebab,
+    concat: concat,
+    couple: couple
   })
 }
 

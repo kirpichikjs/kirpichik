@@ -6,8 +6,8 @@ import search from './search'
 import load from './load'
 import flat from '../lib/flat'
 import createOptions from '../lib/createOptions'
-import ITemplate from '../types/ITemplate'
-import ITemplateSource from '../types/ITemplateSource'
+import ITemplate from '../interfaces/ITemplate'
+import ITemplateSource from '../interfaces/ITemplateSource'
 
 /**
  * Prepare templates to writing
@@ -15,26 +15,30 @@ import ITemplateSource from '../types/ITemplateSource'
  * @param components
  * @param optionsString
  */
-async function prepare (
+async function prepare(
   templateSource: ITemplateSource[],
   components: [string],
   optionsString?: string
 ): Promise<ITemplate[]> {
-  const options = optionsString && createOptions(optionsString) || {}
+  const options = (optionsString && createOptions(optionsString)) || {}
 
-  return flat(components.map((component) => templateSource.map((template) => ({
-    name: component,
-    originName: template.originName,
-    ext: template.ext,
-    compiled: compile(
-      template.source,
-      {
-        '__NAME__': component,
-        ...options
-      },
-      template.helpers
+  return flat(
+    components.map(component =>
+      templateSource.map(template => ({
+        name: component,
+        originName: template.originName,
+        ext: template.ext,
+        compiled: compile(
+          template.source,
+          {
+            __NAME__: component,
+            ...options
+          },
+          template.helpers
+        )
+      }))
     )
-  }))))
+  )
 }
 
 export default prepare

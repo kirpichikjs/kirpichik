@@ -1,14 +1,14 @@
 import * as Handlebars from 'handlebars'
 import registerHelpers from './registerHelpers'
 import initCompiler from './initCompiler'
-import IHelpers from '../types/IHelpers'
+import IHelpers from '../interfaces/IHelpers'
 
 /**
  * Parse template data, replace constants, apply helpers
  * @param template - Loaded template content
  * @param options - Template options
  */
-function compile (template: string, options: any, helpers?: IHelpers): string {
+function compile(template: string, options: any, helpers?: IHelpers): string {
   initCompiler()
 
   if (helpers) {

@@ -3,25 +3,22 @@ import * as path from 'path'
 import chalk from 'chalk'
 import messenger from '../lib/messenger'
 import checkComponentName from '../lib/checkComponentName'
-import ITemplate from '../types/ITemplate'
-import IConfig from '../types/IConfig'
+import ITemplate from '../interfaces/ITemplate'
+import IConfig from '../interfaces/IConfig'
 
 /**
  * Write components to current user directory
  * @param parsedTemplates
  */
-function write (config: IConfig, parsedTemplates: ITemplate[]) {
+function write(config: IConfig, parsedTemplates: ITemplate[]) {
   const targetDir = process.cwd()
-  const { namesIngorePatterns = [] } = config
+  const {namesIngorePatterns = []} = config
 
-  parsedTemplates.map((template) => {
-    const { name, ext, compiled, originName } = template
-    const hasOriginName = checkComponentName.length > 0 &&
-      checkComponentName(namesIngorePatterns, originName)
+  parsedTemplates.map(template => {
+    const {name, ext, compiled, originName} = template
+    const hasOriginName = checkComponentName(namesIngorePatterns, originName)
     const componentPath = path.join(targetDir, name)
-    const componentName = hasOriginName
-      ? originName
-      : name
+    const componentName = hasOriginName ? originName : name
     const componentFileName = `${componentName}.${ext}`
     const componentFullPath = path.join(componentPath, componentFileName)
 

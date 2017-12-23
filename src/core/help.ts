@@ -3,7 +3,8 @@ import chalk from 'chalk'
 /**
  * Prints utility help info
  */
-async function help () {
+async function help() {
+  /* tslint:disable */
   const info = [
     `${chalk.bold('-h, --help')}        Prints all commands and it\'s description.`,
     `                  ${chalk.bold('Synopsis')}: kirpichik --help`,
@@ -12,9 +13,9 @@ async function help () {
     `                  ${chalk.bold('Synopsis')}: kirpichik --template=<template name> <component name>`,
     `                  ${chalk.bold('Example')}: kirpichik --template=vue ComponentA ComponentB`,
     ``,
-    `${chalk.bold('-b, --branch')}      Generate component based on branch structure.`,
-    `                  ${chalk.bold('Synopsis')}: kirpichik --template=<template name> --branch=<branch name>`,
-    `                  ${chalk.bold('Example')}: kirpichik --template=vue --branch=pug`,
+    `${chalk.bold('-s, --set')}         Generate component composed by passed parts.`,
+    `                  ${chalk.bold('Synopsis')}: kirpichik --template=<template name> --set=<part name>,<part name>`,
+    `                  ${chalk.bold('Example')}: kirpichik --template=vue --set=pug,less`,
     ``,
     `${chalk.bold('-o, --options')}     Pass options to generated components.`,
     `                  All options must be passed in followed format:`,
@@ -26,6 +27,7 @@ async function help () {
     `                  ${chalk.bold('Synopsis')}: kirpichik --info --template=<template name>`,
     `                  ${chalk.bold('Example')}: kirpichik --info --template=vue`
   ]
+  /* tslint:enable */
 
   console.info(info.join('\n'))
 }

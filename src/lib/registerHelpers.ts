@@ -1,11 +1,11 @@
 import * as Handlebars from 'handlebars'
-import IHelpers from '../types/IHelpers'
+import IHelpers from '../interfaces/IHelpers'
 
 /**
  * Register functions from helpers hash as handlebars helper
  * @param helpers - Helpers hash
  */
-function registerHelpers (helpers: IHelpers) {
+function registerHelpers(helpers: IHelpers) {
   for (let helper in helpers) {
     Handlebars.registerHelper(helper, helpers[helper])
   }

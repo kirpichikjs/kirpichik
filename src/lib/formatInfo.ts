@@ -1,31 +1,24 @@
 import chalk from 'chalk'
 import formatAdditionalData from './formatAdditionalData'
-import ITemplateInfo from '../types/ITemplateInfo'
+import IConfig from '../interfaces/IConfig'
 
 /**
  * Format template info to outputing
- * @param info
+ * @param templateConfig
  */
-function formatInfo (info: ITemplateInfo): string {
-  const { name, description, branches, options } = info
+function formatInfo(templateConfig: IConfig, parts: string[]): string {
+  const {name, description, options} = templateConfig
+  const defaultSetString =
+    (templateConfig.defaultSet && templateConfig.defaultSet.join(', ')) || '-'
+  const optionsString =
+    (options && Object.keys(options).length > 0 && formatAdditionalData(options)) || '-'
   let infoOutput = [
     `${chalk.bold('Name')}: ${name}`,
     `${chalk.bold('Description')}: ${description}`,
+    `${chalk.bold('Default set')}: ${defaultSetString}`,
+    `${chalk.bold('Parts')}: ${parts.join(', ')}`,
+    `${chalk.bold('Options')}: ${optionsString}`
   ]
-
-  if (branches && Object.keys(branches).length > 0) {
-    infoOutput = infoOutput.concat([
-      `${chalk.bold('Branches')}:`,
-      formatAdditionalData(branches)]
-    )
-  }
-
-  if (options && Object.keys(options).length > 0) {
-    infoOutput = infoOutput.concat([
-      `${chalk.bold('Options')}:`,
-      formatAdditionalData(options)]
-    )
-  }
 
   return infoOutput.join('\n')
 }

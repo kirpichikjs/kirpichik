@@ -6,7 +6,7 @@ test('Executes shell commands', async () => {
   expect(result).not.toBeNull()
 })
 
-test('Throws when exited with error', async (done) => {
+test('Throws when exited with error', async done => {
   try {
     await exec('not existed command')
   } catch (err) {

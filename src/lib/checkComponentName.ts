@@ -3,10 +3,10 @@
  * @param ignorePatterns
  * @param name
  */
-function checkComponentName (ignorePatterns: string[], name: string): Boolean {
+function checkComponentName(ignorePatterns: string[], name: string): Boolean {
   let passed = false
 
-  ignorePatterns.forEach((pattern) => {
+  ignorePatterns.forEach(pattern => {
     if (pattern === '*') {
       passed = true
     } else {

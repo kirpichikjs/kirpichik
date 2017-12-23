@@ -20,12 +20,20 @@ test('Parsing with kebab helper', () => {
 })
 
 test('Parsing with custom reverse helper', () => {
-  const parsedTemplate = compile(fixtures.customHelper.source, {
-    __NAME__: 'Component',
-    __CONTENT__: 'Component content'
-  }, {
-    custom: (input) => input.split('').reverse().join('')
-  })
+  const parsedTemplate = compile(
+    fixtures.customHelper.source,
+    {
+      __NAME__: 'Component',
+      __CONTENT__: 'Component content'
+    },
+    {
+      custom: input =>
+        input
+          .split('')
+          .reverse()
+          .join('')
+    }
+  )
 
   expect(parsedTemplate).toEqual(fixtures.customHelper.parsed)
 })

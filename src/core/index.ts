@@ -11,11 +11,11 @@ import help from './help'
  * Generate components by options
  * @param args
  */
-async function core (args: any) {
+async function core(args: any) {
   const templateName = args.t || args.template
   const helpRequesting = args.h || args.help
   const infoRequesting = args.i || args.info
-  const branch = args.b || args.branch
+  const customSet = args.s || args.set
   const options = args.o || args.options
   const components = args._
 
@@ -24,9 +24,8 @@ async function core (args: any) {
     process.exit()
   }
 
-  const targetTemplateName: string = templateName.indexOf('kirpichik-') === -1
-    ? `kirpichik-${templateName}`
-    : templateName
+  const targetTemplateName: string =
+    templateName.indexOf('kirpichik-') === -1 ? `kirpichik-${templateName}` : templateName
 
   if ((!components || components.length === 0) && !infoRequesting) {
     messenger('No components to generate!', 'error')
@@ -36,10 +35,13 @@ async function core (args: any) {
   const allowedTemplates: string[] = await search(templateName)
 
   if (allowedTemplates.indexOf(targetTemplateName) === -1) {
-    messenger([
-      'Target template is not installed yet!',
-      `Try: npm i -g kirpichik-${templateName}`
-    ].join('\n'), 'error')
+    messenger(
+      [
+        'Target template is not installed yet!',
+        `Try with npm: npm i -g kirpichik-${templateName}`
+      ].join('\n'),
+      'error'
+    )
     process.exit(1)
   }
 
@@ -47,12 +49,8 @@ async function core (args: any) {
     await info(targetTemplateName)
   } else {
     const targetTemplateConfig = await loadConfig(targetTemplateName)
-    const targetTemplateSource = await load(targetTemplateName, targetTemplateConfig, branch)
-    const compiledTemplates = await prepare(
-      targetTemplateSource,
-      components,
-      options
-    )
+    const targetTemplateSource = await load(targetTemplateName, targetTemplateConfig, customSet)
+    const compiledTemplates = await prepare(targetTemplateSource, components, options)
 
     await write(targetTemplateConfig, compiledTemplates)
   }
