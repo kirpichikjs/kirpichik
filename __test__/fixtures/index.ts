@@ -7,6 +7,9 @@ interface Ifixtures {
 interface Ifixture {
   [x: string]: string
 }
+interface IPartials {
+  [x: string]: string
+}
 
 const fixtures: Ifixtures = {
   plain: {
@@ -24,7 +27,15 @@ const fixtures: Ifixtures = {
   registerHelpers: {
     source: fs.readFileSync(path.join(__dirname, './source/registerHelpers.html'), 'utf-8'),
     parsed: fs.readFileSync(path.join(__dirname, './parsed/registerHelpers.html'), 'utf-8')
+  },
+  withPartial: {
+    source: fs.readFileSync(path.join(__dirname, './source/withPartial.html'), 'utf-8'),
+    parsed: fs.readFileSync(path.join(__dirname, './parsed/withPartial.html'), 'utf-8')
   }
 }
 
-export default fixtures
+const partials: IPartials = {
+  test: fs.readFileSync(path.join(__dirname, './partials/test.html'), 'utf-8')
+}
+
+export {fixtures, partials}

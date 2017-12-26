@@ -1,12 +1,9 @@
+import ITemplateOptions from './ITemplateOptions'
+
 export default interface IConfig {
   name: string
-  description: string
+  description?: string
   namesIngorePatterns?: string[]
-  defaultSet: string[]
-  helpers?: {
-    [x: string]: Function
-  }
-  options?: {
-    [x: string]: string
-  }
+  defaultSet?: string[]
+  options?: ITemplateOptions
 }

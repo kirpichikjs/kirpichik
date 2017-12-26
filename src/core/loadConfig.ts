@@ -1,6 +1,7 @@
 import * as path from 'path'
 import * as fs from 'fs'
 import getRootModulesPath from '../lib/getRootModulesPath'
+
 import IConfig from '../interfaces/IConfig'
 
 /**

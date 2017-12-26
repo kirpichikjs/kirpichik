@@ -1,3 +1,6 @@
 export default interface ITemplateOptions {
-  [x: string]: string
+  [x: string]: {
+    description: string,
+    default?: string
+  }
 }

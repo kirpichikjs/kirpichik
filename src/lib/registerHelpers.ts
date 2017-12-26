@@ -1,4 +1,5 @@
 import * as Handlebars from 'handlebars'
+
 import IHelpers from '../interfaces/IHelpers'
 
 /**

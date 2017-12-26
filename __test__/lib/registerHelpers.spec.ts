@@ -1,5 +1,5 @@
 import * as Handlebars from 'handlebars'
-import fixtures from '../fixtures'
+import {fixtures} from '../fixtures'
 import registerHelpers from '../../src/lib/registerHelpers'
 
 test('Register helpers correctly in Handlebars instance', () => {

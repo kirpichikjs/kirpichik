@@ -1,39 +1,45 @@
 import compile from '../../src/lib/compile'
+import registerHelpers from '../../src/lib/registerHelpers'
+import initCompiler from '../../src/lib/initCompiler'
 import * as fs from 'fs'
 import * as path from 'path'
-import fixtures from '../fixtures'
+import {fixtures} from '../fixtures'
 
-test('Parsing with common variables', () => {
-  const parsedTemplate = compile(fixtures.plain.source, {
-    __NAME__: 'Component'
+describe('Compile core function tests', () => {
+  beforeAll(() => {
+    initCompiler()
   })
 
-  expect(parsedTemplate).toEqual(fixtures.plain.parsed)
-})
+  test('Parsing with common variables', () => {
+    const parsedTemplate = compile(fixtures.plain.source, {
+      __NAME__: 'Component'
+    })
 
-test('Parsing with kebab helper', () => {
-  const parsedTemplate = compile(fixtures.kebab.source, {
-    __NAME__: 'KebabComponent'
+    expect(parsedTemplate).toEqual(fixtures.plain.parsed)
   })
 
-  expect(parsedTemplate).toEqual(fixtures.kebab.parsed)
-})
+  test('Parsing with kebab helper', () => {
+    const parsedTemplate = compile(fixtures.kebab.source, {
+      __NAME__: 'KebabComponent'
+    })
 
-test('Parsing with custom reverse helper', () => {
-  const parsedTemplate = compile(
-    fixtures.customHelper.source,
-    {
-      __NAME__: 'Component',
-      __CONTENT__: 'Component content'
-    },
-    {
+    expect(parsedTemplate).toEqual(fixtures.kebab.parsed)
+  })
+
+  test('Parsing with custom reverse helper', () => {
+    registerHelpers({
       custom: input =>
         input
           .split('')
           .reverse()
           .join('')
-    }
-  )
+    })
 
-  expect(parsedTemplate).toEqual(fixtures.customHelper.parsed)
+    const parsedTemplate = compile(fixtures.customHelper.source, {
+      __NAME__: 'Component',
+      __CONTENT__: 'Component content'
+    })
+
+    expect(parsedTemplate).toEqual(fixtures.customHelper.parsed)
+  })
 })

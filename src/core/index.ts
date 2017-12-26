@@ -1,11 +1,18 @@
-import messenger from '../lib/messenger'
+import * as path from 'path'
 import search from './search'
+import initCompiler from './initCompiler'
 import loadConfig from './loadConfig'
 import load from './load'
 import prepare from './prepare'
 import write from './write'
 import info from './info'
 import help from './help'
+
+import loadTemplateResources from './loadResources'
+
+import parseArgs from './parseArgs'
+import messenger from '../lib/messenger'
+import getRootModulesPath from '../lib/getRootModulesPath'
 
 /**
  * Generate components by options
@@ -18,6 +25,11 @@ async function core(args: any) {
   const customSet = args.s || args.set
   const options = args.o || args.options
   const components = args._
+  let parsedOptions = {}
+
+  if (options) {
+    parsedOptions = parseArgs(options)
+  }
 
   if (helpRequesting) {
     help()
@@ -45,12 +57,26 @@ async function core(args: any) {
     process.exit(1)
   }
 
+  const rootPath = await getRootModulesPath()
+  const templatePath = path.resolve(rootPath, targetTemplateName)
+
   if (infoRequesting) {
     await info(targetTemplateName)
   } else {
     const targetTemplateConfig = await loadConfig(targetTemplateName)
-    const targetTemplateSource = await load(targetTemplateName, targetTemplateConfig, customSet)
-    const compiledTemplates = await prepare(targetTemplateSource, components, options)
+    const templateResources = await loadTemplateResources(templatePath)
+    const targetTemplateSource = await load(
+      templatePath,
+      targetTemplateConfig,
+      customSet,
+      templateResources
+    )
+    const compiledTemplates = await prepare(
+      templateResources,
+      targetTemplateSource,
+      components,
+      parsedOptions
+    )
 
     await write(targetTemplateConfig, compiledTemplates)
   }

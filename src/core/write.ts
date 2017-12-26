@@ -3,6 +3,7 @@ import * as path from 'path'
 import chalk from 'chalk'
 import messenger from '../lib/messenger'
 import checkComponentName from '../lib/checkComponentName'
+
 import ITemplate from '../interfaces/ITemplate'
 import IConfig from '../interfaces/IConfig'
 
