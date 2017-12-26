@@ -16,7 +16,8 @@
 5. [Component creation](#component-creation)
 6. [Templates reference](#templates-reference)
 7. [Helper reference](#helper-reference)
-8. [Roadmap](#roadmap)
+8. [Partials reference](#partials-reference)
+9. [Roadmap](#roadmap)
 
 ## Installation
 
@@ -48,7 +49,7 @@ kirpichik -t vue Component OtherComponent
 |`-t`, `--template` | Component template                                         |
 |`-h`, `--help`     | Help calling                                               |
 |`-i`, `--info`     | Info about choosen template. Must be used with `-t`        |
-|`-b`, `--branch`   | Using choosen template branch                              |
+|`-s`, `--set`      | Generate component composed by passed parts                |
 |`-o`, `--options`  | Pass options to template for "slim configuration"          |
 
 You can also call `--help` and see all options with examples.
@@ -60,22 +61,23 @@ structure:
 
 ```
 ├──src/
-|   ├──template/  # There are all template files
-|   └──helpers/   # There are all helpers functions
+|   ├──fragments/  # There are all template fragments
+|   ├──partials/   # There are all template partials
+|   └──helpers/    # There are all helpers functions
 └──kirpichikrc.json
 ```
 
-`kirpichikrc.json` contains small configuration of component:
+`kirpichik.json` contains small configuration of component:
 
-`name` - component name
+| Property              | Type        | Description                                                                                                                    |
+|-----------------------|-------------|--------------------------------------------------------------------------------------------------------------------------------|
+| `name`                | `string`    | Template name                                                                                                                  |
+| `description`         | `string`    | Component description                                                                                                          |
+| `namesIngorePatterns` | `string[]`  | Save original template files name. Directory with compiled component always takes component name!                              |
+| `defaultSet`          | `string[]`  | Default `set` option data                                                                                                      |
+| `options`             | `Object`    | Description and deault of all template options. `description` includes option description, `default` includes value of option. |
 
-`description` - component description
-
-`namesIngorePatterns` - save original template files name. Directory always takes component name!
-
-`branches` - description and definition of all template branches
-
-`options` - description and definition of all template options
+Also, you can create `kirpichik` property in `package.json` file in you template directory.
 
 You can also check example of [vue-component template](https://github.com/kirpichikjs/kirpichik-vue).
 
@@ -128,10 +130,73 @@ Compilation result with `HelloWorld` name:
 <div class="dlroWolleH"></div>
 ```
 
-:tada: that it!
+### Partials reference
+
+You can use `partials` from `handlebars` for write reusable code and make your templates more
+cleaner.
+
+For create `partial` create directory with one file (required) in `partials` directory and call it
+in your template like this:
+
+```html
+<div class="hello">{{>myPartial}}</div>
+```
+
+If you want to use partials dynamically, you must use `partial` helper and pass partial name as
+single parameter.
+
+Example:
+
+`css` partial:
+
+```css
+.__NAME__ {
+  display: block;
+}
+```
+
+`sass` partial:
+
+```sass
+.__NAME__
+  display: block
+```
+
+We pass `preprocessor` option as `sass` and component name equals to `TestComponent`.
+
+Component template:
+
+```html
+<scipt>
+  export default {
+    name: '{{__NAME__}}'
+  }
+</script>
+
+<style lang="{{preprocessor}}">
+  {{>partial preprocessor}}
+</style>
+```
+
+Must rendered to:
+
+```html
+<scipt>
+  export default {
+    name: 'TestComponent'
+  }
+</script>
+
+<style lang="sass">
+  .TestComponent
+    display: block
+</style>
+```
+
+You can also check example of partials usage in [vue-component template](https://github.com/kirpichikjs/kirpichik-vue).
 
 ## Roadmap
 
-- [ ] - allow to save origin name of specifiy files
+- [x] - allow to save origin name of specifiy files
 - [ ] - extract application core to isolated package
 - [ ] - write documentation
