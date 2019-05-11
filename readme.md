@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# Kirpichik [![Build Status](https://travis-ci.org/kirpichikjs/kirpichik.svg?branch=master)](https://travis-ci.org/kirpichikjs/kirpichik)
+# Kirpichik [![Build Status](https://travis-ci.org/kirpichikjs/kirpichik.svg?branch=master)](https://travis-ci.org/kirpichikjs/kirpichik) [![Greenkeeper badge](https://badges.greenkeeper.io/lamartire/kirpichik.svg)](https://greenkeeper.io/)
 
 > Minimalistic and flexible scaffold tool for components creation :building_construction:
 
